@@ -5,6 +5,8 @@
  */
 package kosanbookingsystem;
 
+import java.sql.ResultSet;
+
 /**
  *
  * @author Asus
@@ -12,14 +14,24 @@ package kosanbookingsystem;
 
 //This class generates sql strings. The method gets the input number from the model and later
 //passes the string into database connector class.
-public class QueryGenerator {
+public class QueryGenerator extends DatabaseConnector{
     
-    public void generate(int input){
-        switch(input){
-            case 1:
-                String sql_login = "";
-            case 2:
-                String sql_house = "";
+    public ResultSet login(String username, String password){
+        ResultSet result = null;
+        String customerSQL = "";
+        executeQuery(customerSQL);
+        if(executeQuery(customerSQL) != null){
+            result = executeQuery(customerSQL);
         }
+        else if(executeQuery(customerSQL) == null){
+            String ownerSQL = "";
+            result = executeQuery(ownerSQL);
+        }
+        else{
+            result = null;
+        }
+        
+        return result;
     }
+    
 }
